@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const { handleWelcomeMessage } = require('./features/welcome');
 const { initializeReminders, handleReminderMessage, loadRemindersOnReady } = require('./features/reminder');
+const { handleChannelSetup } = require('./features/channelSetup');
 
 const client = new Client({
     intents: [
@@ -26,5 +27,6 @@ client.once('ready', async () => {
 // Setup features
 handleWelcomeMessage(client);
 handleReminderMessage(client);
+handleChannelSetup(client);
 
 client.login(process.env.DISCORD_TOKEN);
