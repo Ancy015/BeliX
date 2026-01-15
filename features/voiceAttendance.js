@@ -8,7 +8,14 @@ const MEETING_STATUS_FILE = path.join(__dirname, '../meetingStatus.json');
 // Load points data
 function loadPoints() {
     if (fs.existsSync(POINTS_FILE)) {
-        return JSON.parse(fs.readFileSync(POINTS_FILE, 'utf8'));
+        try {
+            const raw = fs.readFileSync(POINTS_FILE, 'utf8');
+            if (!raw || !raw.trim()) return {};
+            return JSON.parse(raw);
+        } catch (e) {
+            console.warn('[VoiceAttendance] Points file invalid, reinitializing');
+            return {};
+        }
     }
     return {};
 }
@@ -21,7 +28,14 @@ function savePoints(points) {
 // Load voice attendance data
 function loadVoiceAttendance() {
     if (fs.existsSync(VOICE_ATTENDANCE_FILE)) {
-        return JSON.parse(fs.readFileSync(VOICE_ATTENDANCE_FILE, 'utf8'));
+        try {
+            const raw = fs.readFileSync(VOICE_ATTENDANCE_FILE, 'utf8');
+            if (!raw || !raw.trim()) return {};
+            return JSON.parse(raw);
+        } catch (e) {
+            console.warn('[VoiceAttendance] Attendance file invalid, reinitializing');
+            return {};
+        }
     }
     return {};
 }
@@ -34,7 +48,14 @@ function saveVoiceAttendance(data) {
 // Load meeting status data
 function loadMeetingStatus() {
     if (fs.existsSync(MEETING_STATUS_FILE)) {
-        return JSON.parse(fs.readFileSync(MEETING_STATUS_FILE, 'utf8'));
+        try {
+            const raw = fs.readFileSync(MEETING_STATUS_FILE, 'utf8');
+            if (!raw || !raw.trim()) return { isActive: false, startTime: null, memberCount: 0 };
+            return JSON.parse(raw);
+        } catch (e) {
+            console.warn('[VoiceAttendance] Meeting status file invalid, using defaults');
+            return { isActive: false, startTime: null, memberCount: 0 };
+        }
     }
     return { isActive: false, startTime: null, memberCount: 0 };
 }

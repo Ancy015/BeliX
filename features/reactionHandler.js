@@ -6,7 +6,14 @@ const POINTS_FILE = path.join(__dirname, '../points.json');
 // Load points data
 function loadPoints() {
     if (fs.existsSync(POINTS_FILE)) {
-        return JSON.parse(fs.readFileSync(POINTS_FILE, 'utf8'));
+        try {
+            const raw = fs.readFileSync(POINTS_FILE, 'utf8');
+            if (!raw || !raw.trim()) return {};
+            return JSON.parse(raw);
+        } catch (e) {
+            console.warn('[ReactionHandler] Points file invalid, reinitializing');
+            return {};
+        }
     }
     return {};
 }
