@@ -6,6 +6,10 @@ const { handleChannelSetup } = require('./features/channelSetup');
 const { handleProgressUpdate } = require('./features/progressupdate');
 const { handlePointsCommand } = require('./features/leaderboard');
 const { handleReactionPoints } = require('./features/reactionHandler');
+const { handleMeetingAttendance } = require('./features/meetingAttendance');
+const { handleVoiceChannelAttendance } = require('./features/voiceAttendance');
+const { handleCodingQuestions } = require('./features/codingQuestions');
+const { handleDailyTechWords } = require('./features/dailyTechWords');
 
 const client = new Client({
     intents: [
@@ -15,6 +19,7 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.DirectMessages,
         GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.GuildVoiceStates,
     ],
     partials: [Partials.Channel, Partials.Message, Partials.Reaction],
 });
@@ -36,6 +41,10 @@ handleChannelSetup(client);
 handleProgressUpdate(client);
 handlePointsCommand(client);
 handleReactionPoints(client);
+handleVoiceChannelAttendance(client);
+handleMeetingAttendance(client);
+handleCodingQuestions(client);
+handleDailyTechWords(client);
 console.log('✓ All features loaded');
 
 client.login(process.env.DISCORD_TOKEN);

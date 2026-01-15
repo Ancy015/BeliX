@@ -66,6 +66,15 @@ module.exports = {
 
                 console.log(`✓ Awarded ${pointsToAward} point to ${user.username} for reacting with ${reaction.emoji.name}! Total: ${points[user.id].points}`);
 
+                // Send reply to user
+                try {
+                    await reaction.message.reply({
+                        content: `✅ **${user.username}** earned **+${pointsToAward} point** for reacting with ${reaction.emoji.name}!\nTotal Points: **${points[user.id].points}**`
+                    });
+                } catch (error) {
+                    console.error('Could not send reply:', error.message);
+                }
+
             } catch (error) {
                 console.error('Error handling reaction:', error);
             }

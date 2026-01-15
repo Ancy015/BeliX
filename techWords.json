@@ -1,0 +1,277 @@
+{
+  "softwareEngineering": [
+    {
+      "word": "SDLC",
+      "definition": "Software Development Life Cycle - A structured process for planning, creating, testing, and deploying software",
+      "example": "A company building a mobile app follows SDLC phases: planning features, designing UI, coding, testing for bugs, and finally releasing to Google Play Store"
+    },
+    {
+      "word": "Agile",
+      "definition": "A flexible software development approach that breaks projects into small, iterative cycles called sprints",
+      "example": "Instead of spending 6 months building an entire e-commerce site, the team releases a basic version in 2 weeks, then adds features weekly based on user feedback"
+    },
+    {
+      "word": "Scrum",
+      "definition": "An Agile framework where teams work in short sprints with daily meetings to track progress",
+      "example": "A development team has a 15-minute daily standup meeting where each member shares what they did yesterday, what they'll do today, and any blockers they face"
+    },
+    {
+      "word": "Waterfall",
+      "definition": "A sequential software development model where each phase must be completed before the next begins",
+      "example": "Building a banking system where all requirements are gathered first, then design is completed, then coding starts - no going back to change requirements mid-development"
+    },
+    {
+      "word": "Debugging",
+      "definition": "The process of finding and fixing errors or bugs in code",
+      "example": "A login button doesn't work, so the developer uses console logs and breakpoints to find that the password validation function has a typo"
+    },
+    {
+      "word": "Git",
+      "definition": "A version control system that tracks changes in code and allows multiple developers to collaborate",
+      "example": "Three developers work on the same project - one adds a payment feature, another fixes bugs, and Git merges their code without conflicts"
+    },
+    {
+      "word": "CI/CD",
+      "definition": "Continuous Integration/Continuous Deployment - Automated process of testing and deploying code changes",
+      "example": "When a developer pushes code to GitHub, automated tests run, and if they pass, the new version is automatically deployed to the live website"
+    },
+    {
+      "word": "API",
+      "definition": "Application Programming Interface - A set of rules that allows different software applications to communicate",
+      "example": "A weather app uses Google Maps API to show weather data on a map, and OpenWeather API to get temperature information"
+    },
+    {
+      "word": "UML",
+      "definition": "Unified Modeling Language - A standardized way to visualize software system design using diagrams",
+      "example": "Before coding a hospital management system, developers create UML diagrams showing how patients, doctors, and appointments relate to each other"
+    },
+    {
+      "word": "Testing",
+      "definition": "The process of verifying that software works correctly and meets requirements",
+      "example": "Before launching an online exam platform, testers check if students can submit answers, if timers work correctly, and if results are calculated properly"
+    }
+  ],
+  "cybersecurity": [
+    {
+      "word": "Encryption",
+      "definition": "Converting readable data into coded format to prevent unauthorized access",
+      "example": "WhatsApp uses end-to-end encryption so that your messages look like random characters to anyone intercepting them, only the recipient can decode them"
+    },
+    {
+      "word": "Decryption",
+      "definition": "Converting encrypted data back into readable format using a key",
+      "example": "When you enter your password on a banking app, it decrypts your encrypted account data so you can view your balance"
+    },
+    {
+      "word": "Malware",
+      "definition": "Malicious software designed to damage, disrupt, or gain unauthorized access to computer systems",
+      "example": "A user downloads a fake PDF file that installs ransomware, locking all their files and demanding payment to unlock them"
+    },
+    {
+      "word": "Phishing",
+      "definition": "A cyber attack where attackers pretend to be trustworthy to steal sensitive information",
+      "example": "You receive an email that looks like it's from your bank asking you to click a link and enter your password - it's actually a fake website stealing your credentials"
+    },
+    {
+      "word": "Brute Force",
+      "definition": "A hacking method that tries every possible password combination until finding the correct one",
+      "example": "A hacker uses software to try millions of password combinations like '0000', '0001', '0002' until they crack a 4-digit PIN"
+    },
+    {
+      "word": "2FA",
+      "definition": "Two-Factor Authentication - A security process requiring two different verification methods to access an account",
+      "example": "After entering your Instagram password, you receive an OTP on your phone that you must also enter to log in"
+    },
+    {
+      "word": "Ethical Hacking",
+      "definition": "Legal hacking performed to find security vulnerabilities before malicious hackers exploit them",
+      "example": "A company hires a certified ethical hacker to try breaking into their website to identify weak points in their security system"
+    },
+    {
+      "word": "Penetration Testing",
+      "definition": "Simulated cyber attack on a system to evaluate its security",
+      "example": "Before launching an e-commerce site, security experts attempt to hack it, steal fake customer data, and break payment systems to find vulnerabilities"
+    },
+    {
+      "word": "GDPR",
+      "definition": "General Data Protection Regulation - EU law protecting user privacy and personal data",
+      "example": "Websites now ask for cookie consent and allow users to download or delete their personal data to comply with GDPR"
+    },
+    {
+      "word": "Cyber Law",
+      "definition": "Legal rules and regulations governing internet use and digital crimes",
+      "example": "India's IT Act 2000 makes hacking, spreading computer viruses, and online fraud punishable with fines and imprisonment"
+    }
+  ],
+  "emergingTech": [
+    {
+      "word": "AI",
+      "definition": "Artificial Intelligence - Technology that enables machines to simulate human intelligence and decision-making",
+      "example": "ChatGPT understands your questions and generates human-like responses, Netflix recommends shows based on what you watch"
+    },
+    {
+      "word": "Machine Learning",
+      "definition": "A subset of AI where computers learn from data without being explicitly programmed",
+      "example": "Spotify learns your music taste by analyzing what songs you play, skip, or replay, then creates personalized playlists"
+    },
+    {
+      "word": "Deep Learning",
+      "definition": "Advanced ML using neural networks with multiple layers to process complex data",
+      "example": "Tesla's self-driving cars use deep learning to recognize pedestrians, traffic signs, and other vehicles in real-time"
+    },
+    {
+      "word": "Neural Networks",
+      "definition": "Computing systems inspired by the human brain that recognize patterns in data",
+      "example": "Face unlock on your phone uses neural networks to learn your facial features and distinguish you from others"
+    },
+    {
+      "word": "Blockchain",
+      "definition": "A decentralized digital ledger that records transactions across multiple computers securely",
+      "example": "Bitcoin transactions are recorded on blockchain, making it nearly impossible to alter or fake transaction history"
+    },
+    {
+      "word": "IoT",
+      "definition": "Internet of Things - Network of physical devices connected to the internet, collecting and sharing data",
+      "example": "Your smart home has IoT devices: lights controlled by voice, refrigerator that orders groceries, and AC that adjusts temperature automatically"
+    },
+    {
+      "word": "AR",
+      "definition": "Augmented Reality - Technology that overlays digital information onto the real world",
+      "example": "Pokemon Go shows virtual creatures in your real surroundings through your phone camera, IKEA app lets you see how furniture looks in your room"
+    },
+    {
+      "word": "VR",
+      "definition": "Virtual Reality - Immersive technology that creates completely digital environments",
+      "example": "Using a VR headset, medical students practice surgery in a virtual operating room without any real-world risks"
+    },
+    {
+      "word": "Quantum Computing",
+      "definition": "Advanced computing using quantum mechanics to process information exponentially faster than traditional computers",
+      "example": "While a regular computer would take years to crack complex encryption, a quantum computer could potentially do it in minutes"
+    },
+    {
+      "word": "5G",
+      "definition": "Fifth-generation wireless technology offering ultra-fast internet speeds and low latency",
+      "example": "With 5G, you can download a full HD movie in seconds, play cloud games without lag, and have smooth video calls even in crowded areas"
+    },
+    {
+      "word": "Edge Computing",
+      "definition": "Processing data near its source rather than sending it to distant cloud servers",
+      "example": "A smart traffic light processes camera data locally to change signals in real-time, instead of sending video to the cloud and waiting for response"
+    }
+  ],
+  "mathematics": [
+    {
+      "word": "Discrete Mathematics",
+      "definition": "Study of mathematical structures that are distinct and separate, used in computer algorithms and logic",
+      "example": "Graph theory (part of discrete math) helps Google Maps find the shortest route between two locations by treating roads as edges and intersections as nodes"
+    },
+    {
+      "word": "Boolean Algebra",
+      "definition": "Mathematical system dealing with true/false values, fundamental to digital circuit design",
+      "example": "When you search 'Python AND programming NOT snake', the search engine uses Boolean logic to find pages about programming Python, excluding results about reptiles"
+    },
+    {
+      "word": "Linear Algebra",
+      "definition": "Study of vectors, matrices, and linear equations used in graphics and machine learning",
+      "example": "When you rotate or resize an image in Photoshop, linear algebra matrices calculate the new position of every pixel"
+    },
+    {
+      "word": "Probability",
+      "definition": "Mathematical study of likelihood and chance of events occurring",
+      "example": "Email spam filters use probability to calculate the chance a message is spam based on words like 'free', 'winner', or 'click here'"
+    },
+    {
+      "word": "Statistics",
+      "definition": "Science of collecting, analyzing, and interpreting data to make informed decisions",
+      "example": "YouTube uses statistics to show you 'Trending' videos - analyzing view counts, watch time, and engagement across millions of users"
+    },
+    {
+      "word": "Calculus",
+      "definition": "Mathematical study of continuous change, used in optimization and machine learning",
+      "example": "Netflix uses calculus to optimize video streaming quality - calculating the perfect bitrate based on your internet speed to avoid buffering"
+    },
+    {
+      "word": "Algorithm",
+      "definition": "Step-by-step procedure for solving a problem or completing a task",
+      "example": "Instagram's feed algorithm decides which posts to show first based on your likes, comments, and time spent viewing similar content"
+    },
+    {
+      "word": "Big O Notation",
+      "definition": "Mathematical notation describing how algorithm performance changes as input size grows",
+      "example": "Searching for a name in an unsorted list of 1 million contacts is O(n) - it might check all million. In a sorted list with binary search, it's O(log n) - checks only about 20"
+    },
+    {
+      "word": "Set Theory",
+      "definition": "Mathematical study of collections of objects and relationships between them",
+      "example": "Database queries use set theory - 'Find users who are in both Premium subscribers AND active this month' uses the intersection of two sets"
+    },
+    {
+      "word": "Graph Theory",
+      "definition": "Study of graphs (networks of connected nodes), used in social networks and routing",
+      "example": "LinkedIn's 'People You May Know' uses graph theory to find connections - if you know A and B, and they both know C, the algorithm suggests C to you"
+    }
+  ],
+  "indianTech": [
+    {
+      "word": "Aadhaar",
+      "definition": "India's unique 12-digit biometric identification system for residents",
+      "example": "You can open a bank account, get a SIM card, file income tax, or verify identity for government services using your Aadhaar number"
+    },
+    {
+      "word": "UPI",
+      "definition": "Unified Payments Interface - India's instant real-time payment system for mobile transactions",
+      "example": "You can pay for groceries by scanning a QR code with Google Pay, PhonePe, or Paytm - money transfers instantly from your bank account"
+    },
+    {
+      "word": "Digital India",
+      "definition": "Government initiative to transform India into a digitally empowered society",
+      "example": "Village residents can now access government certificates, apply for schemes, and make digital payments through Common Service Centers without traveling to cities"
+    },
+    {
+      "word": "Startup India",
+      "definition": "Government program to support and promote entrepreneurship and innovation",
+      "example": "A college student with a tech startup idea can register under Startup India to get tax benefits, funding support, and mentorship from industry experts"
+    },
+    {
+      "word": "NPTEL",
+      "definition": "National Programme on Technology Enhanced Learning - Free online courses by IIT/IISc professors",
+      "example": "Engineering students across India take NPTEL courses on Data Structures, Machine Learning, or Web Development for free, earning certificates recognized by companies"
+    },
+    {
+      "word": "CoWIN",
+      "definition": "COVID-19 Vaccine Intelligence Network - India's digital platform for vaccine registration and certification",
+      "example": "180 crore+ Indians registered for COVID vaccines, booked slots, and downloaded digital vaccine certificates through the CoWIN app"
+    },
+    {
+      "word": "DigiLocker",
+      "definition": "Cloud-based platform to store and share authentic digital documents issued by Indian government",
+      "example": "Instead of carrying physical driving license and education certificates, you can access verified digital copies from DigiLocker on your phone"
+    },
+    {
+      "word": "BHIM",
+      "definition": "Bharat Interface for Money - UPI-based mobile payment app by NPCI for digital transactions",
+      "example": "A street vendor accepts payments via BHIM without needing a card machine - customers send money directly to their bank account using mobile number or QR code"
+    },
+    {
+      "word": "RuPay",
+      "definition": "India's own card payment network, alternative to Visa and Mastercard",
+      "example": "Your ATM or debit card might have RuPay logo - it's an Indian payment system that processes transactions domestically, reducing foreign transaction fees"
+    },
+    {
+      "word": "e-NAM",
+      "definition": "Electronic National Agriculture Market - Online trading platform for agricultural commodities",
+      "example": "A farmer in Punjab can see real-time prices of wheat across India and sell produce online to buyers in Maharashtra without middlemen"
+    },
+    {
+      "word": "MyGov",
+      "definition": "Citizen engagement platform where people can participate in governance and policy making",
+      "example": "Citizens share ideas on Swachh Bharat, vote in polls about government initiatives, and participate in contests on the MyGov platform"
+    },
+    {
+      "word": "UMANG",
+      "definition": "Unified Mobile Application for New-age Governance - Single app to access 1200+ government services",
+      "example": "Through UMANG app, you can pay electricity bills, check PF balance, apply for passport, book railway tickets - all government services in one place"
+    }
+  ]
+}

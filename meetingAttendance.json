@@ -1,0 +1,15 @@
+{
+  "1461379484824375316": {
+    "messageId": "1461379484824375316",
+    "startTime": "2026-01-15T15:20:35.040Z",
+    "attendees": {
+      "1149972547295793243": {
+        "username": "primsajun",
+        "joinTime": "2026-01-15T15:20:35.044Z",
+        "leaveTime": null,
+        "durationMinutes": 0,
+        "pointsAwarded": 0
+      }
+    }
+  }
+}
