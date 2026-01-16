@@ -212,7 +212,7 @@
       "example": "LinkedIn's 'People You May Know' uses graph theory to find connections - if you know A and B, and they both know C, the algorithm suggests C to you"
     }
   ],
-  "indianTech": 
+  "indianTech": [
     {
       "word": "Aadhaar",
       "definition": "India's unique 12-digit biometric identification system for residents",
@@ -238,4 +238,5 @@
       "definition": "National Programme on Technology Enhanced Learning - Free online courses by IIT/IISc professors",
       "example": "Engineering students across India take NPTEL courses on Data Structures, Machine Learning, or Web Development for free, earning certificates recognized by companies"
     }
-  }    
+  ]
+}
