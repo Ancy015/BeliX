@@ -90,41 +90,36 @@ function isMeetingActive(channel) {
 
 module.exports = {
     handleVoiceChannelAttendance: (client) => {
-        const MEETING_CHANNEL_ID = '1304848107095326830'; // common hall voice channel
+        const MEETING_ANNOUNCEMENT_CHANNEL_ID = '1304848106789015647'; // Text channel for announcements
+        const MEETING_VOICE_CHANNEL_ID = '1304848107095326830'; // Voice channel for meetings
 
-        // Track user voice session start times
-        const voiceSessions = new Map(); // userId -> { joinTime, channelId }
+        // Track user voice session start times and accumulated duration
+        const voiceSessions = new Map(); // userId -> { joinTime, channelId, totalMinutes }
 
         console.log('✓ Voice channel attendance handler loaded');
 
-        // Monitor for "meeting is live" messages in the meeting channel
+        // Monitor for meeting announcements in the announcement channel
         client.on('messageCreate', async (message) => {
             if (message.author.bot) return;
 
-            // Check if message is in the meeting channel text channel
-            if (message.channelId !== MEETING_CHANNEL_ID) return;
+            // Check if message is in the meeting announcement channel
+            if (message.channelId !== MEETING_ANNOUNCEMENT_CHANNEL_ID) return;
 
-            // Check if message contains "meeting is live" keywords
-            const messageContent = message.content.toLowerCase();
-            if (messageContent.includes('meeting is live') || 
-                messageContent.includes('meeting live') ||
-                messageContent.includes('meeting started')) {
-                
-                const meetingStatus = {
-                    isActive: true,
-                    startTime: new Date().toISOString(),
-                    announcer: message.author.username
-                };
+            // Any message in this channel indicates a meeting is happening
+            const meetingStatus = {
+                isActive: true,
+                startTime: new Date().toISOString(),
+                announcer: message.author.username
+            };
 
-                saveMeetingStatus(meetingStatus);
-                console.log(`✓ Meeting announced by ${message.author.username} - Attendance tracking enabled!`);
+            saveMeetingStatus(meetingStatus);
+            console.log(`✓ Meeting announced by ${message.author.username} - Attendance tracking enabled!`);
 
                 try {
                     await message.react('✅');
                 } catch (error) {
                     console.log('Could not add reaction:', error.message);
                 }
-            }
         });
 
         client.on('voiceStateUpdate', async (oldState, newState) => {
@@ -134,10 +129,10 @@ module.exports = {
             try {
                 // User joined a voice channel
                 if (!oldState.channelId && newState.channelId) {
-                    // Only track if joining the meeting channel
-                    if (newState.channelId === MEETING_CHANNEL_ID) {
+                    // Only track if joining the meeting voice channel
+                    if (newState.channelId === MEETING_VOICE_CHANNEL_ID) {
                         // Check if a meeting is currently active
-                        const channel = newState.guild.channels.cache.get(MEETING_CHANNEL_ID);
+                        const channel = newState.guild.channels.cache.get(MEETING_VOICE_CHANNEL_ID);
                         
                         if (!isMeetingActive(channel)) {
                             console.log(`ℹ ${userName} joined meeting channel, but no active meeting detected`);
@@ -145,11 +140,21 @@ module.exports = {
                         }
 
                         const joinTime = new Date();
-                        voiceSessions.set(userId, {
-                            joinTime: joinTime,
-                            channelId: newState.channelId,
-                            username: userName
-                        });
+                        
+                        // Check if user already has accumulated time from previous sessions
+                        let existingSession = voiceSessions.get(userId);
+                        if (!existingSession) {
+                            existingSession = {
+                                joinTime: joinTime,
+                                channelId: newState.channelId,
+                                username: userName,
+                                totalMinutes: 0
+                            };
+                        } else {
+                            existingSession.joinTime = joinTime;
+                        }
+                        
+                        voiceSessions.set(userId, existingSession);
 
                         console.log(`✓ ${userName} joined the meeting voice channel (TRACKING STARTED)`);
 
@@ -176,23 +181,27 @@ module.exports = {
                 // User left a voice channel
                 if (oldState.channelId && !newState.channelId) {
                     // Check if they were in the meeting channel
-                    if (oldState.channelId === MEETING_CHANNEL_ID) {
+                    if (oldState.channelId === MEETING_VOICE_CHANNEL_ID) {
                         const session = voiceSessions.get(userId);
 
                         if (session) {
                             const leaveTime = new Date();
-                            const durationMinutes = Math.floor((leaveTime - session.joinTime) / 60000);
+                            const currentSessionMinutes = Math.floor((leaveTime - session.joinTime) / 60000);
+                            
+                            // Add current session time to total accumulated time
+                            session.totalMinutes += currentSessionMinutes;
+                            const totalMinutes = session.totalMinutes;
 
-                            // Determine points based on duration
-                            // 10-30 min = 3 points, 30+ min = 5 points
+                            // Determine points based on TOTAL accumulated duration
+                            // 10-30 minutes = 3 points, 30+ minutes = 10 points
                             let pointsToAward = 0;
-                            if (durationMinutes >= 30) {
-                                pointsToAward = 5; // 30 minutes or more
-                            } else if (durationMinutes >= 10) {
+                            if (totalMinutes >= 30) {
+                                pointsToAward = 10; // 30 minutes or more
+                            } else if (totalMinutes >= 10) {
                                 pointsToAward = 3; // 10-29 minutes
                             }
 
-                            console.log(`✓ ${userName} left the meeting voice channel after ${durationMinutes} minutes`);
+                            console.log(`✓ ${userName} left the meeting voice channel. Session: ${currentSessionMinutes} min, Total: ${totalMinutes} min`);
 
                             // Award points if duration qualifies
                             if (pointsToAward > 0) {
@@ -211,19 +220,10 @@ module.exports = {
 
                                 savePoints(points);
 
-                                console.log(`✓ Awarded ${pointsToAward} points to ${userName} for ${durationMinutes} min voice meeting! Total: ${points[userId].points}`);
+                                console.log(`✓ AWARDED ${pointsToAward} points to ${userName} for ${totalMinutes} min total meeting time! Total: ${points[userId].points}`);
 
-                                // Try to send DM to user
-                                try {
-                                    const user = await client.users.fetch(userId);
-                                    await user.send({
-                                        content: `🎤 **Meeting Attendance Recorded!**\nYou attended the voice meeting for **${durationMinutes} minutes**\nYou earned **+${pointsToAward} points**!\nTotal Points: **${points[userId].points}**`
-                                    });
-                                } catch (error) {
-                                    console.log(`Could not send DM to ${userName}:`, error.message);
-                                }
                             } else {
-                                console.log(`✗ ${userName} attended for only ${durationMinutes} minutes (minimum 10 minutes required for points)`);
+                                console.log(`✗ ${userName} total attendance ${totalMinutes} minutes (minimum 10 minutes required for points)`);
                             }
 
                             // Update attendance file
@@ -231,13 +231,13 @@ module.exports = {
                             if (attendance[userId] && attendance[userId].sessions.length > 0) {
                                 const lastSession = attendance[userId].sessions[attendance[userId].sessions.length - 1];
                                 lastSession.leaveTime = leaveTime.toISOString();
-                                lastSession.durationMinutes = durationMinutes;
+                                lastSession.durationMinutes = totalMinutes;
                                 lastSession.pointsAwarded = pointsToAward;
                                 saveVoiceAttendance(attendance);
                             }
 
-                            // Remove from active sessions
-                            voiceSessions.delete(userId);
+                            // Keep session in memory in case user rejoins (don't delete it)
+                            voiceSessions.set(userId, session);
                         }
                     }
                 }
@@ -245,22 +245,26 @@ module.exports = {
                 // User switched voice channels
                 if (oldState.channelId && newState.channelId && oldState.channelId !== newState.channelId) {
                     // If they left the meeting channel
-                    if (oldState.channelId === MEETING_CHANNEL_ID) {
+                    if (oldState.channelId === MEETING_VOICE_CHANNEL_ID) {
                         const session = voiceSessions.get(userId);
 
                         if (session) {
                             const leaveTime = new Date();
-                            const durationMinutes = Math.floor((leaveTime - session.joinTime) / 60000);
+                            const currentSessionMinutes = Math.floor((leaveTime - session.joinTime) / 60000);
+                            
+                            // Add current session time to total
+                            session.totalMinutes += currentSessionMinutes;
+                            const totalMinutes = session.totalMinutes;
 
-                            // Determine points based on duration
+                            // Determine points based on total duration
                             let pointsToAward = 0;
-                            if (durationMinutes >= 30) {
-                                pointsToAward = 5;
-                            } else if (durationMinutes >= 10) {
+                            if (totalMinutes >= 30) {
+                                pointsToAward = 10;
+                            } else if (totalMinutes >= 10) {
                                 pointsToAward = 3;
                             }
 
-                            console.log(`✓ ${userName} switched channels (left meeting after ${durationMinutes} minutes)`);
+                            console.log(`✓ ${userName} switched channels (left meeting). Session: ${currentSessionMinutes} min, Total: ${totalMinutes} min`);
 
                             // Award points if duration qualifies
                             if (pointsToAward > 0) {
@@ -279,17 +283,17 @@ module.exports = {
 
                                 savePoints(points);
 
-                                console.log(`✓ Awarded ${pointsToAward} points to ${userName} for ${durationMinutes} min meeting! Total: ${points[userId].points}`);
+                                console.log(`✓ AWARDED ${pointsToAward} points to ${userName} for ${totalMinutes} min meeting! Total: ${points[userId].points}`);
                             }
 
-                            voiceSessions.delete(userId);
+                            voiceSessions.set(userId, session);
                         }
                     }
 
                     // If they joined the meeting channel
-                    if (newState.channelId === MEETING_CHANNEL_ID) {
+                    if (newState.channelId === MEETING_VOICE_CHANNEL_ID) {
                         // Check if a meeting is currently active
-                        const channel = newState.guild.channels.cache.get(MEETING_CHANNEL_ID);
+                        const channel = newState.guild.channels.cache.get(MEETING_VOICE_CHANNEL_ID);
                         
                         if (!isMeetingActive(channel)) {
                             console.log(`ℹ ${userName} switched to meeting channel, but no active meeting detected`);
@@ -297,11 +301,21 @@ module.exports = {
                         }
 
                         const joinTime = new Date();
-                        voiceSessions.set(userId, {
-                            joinTime: joinTime,
-                            channelId: newState.channelId,
-                            username: userName
-                        });
+                        
+                        // Check if user already has accumulated time
+                        let existingSession = voiceSessions.get(userId);
+                        if (!existingSession) {
+                            existingSession = {
+                                joinTime: joinTime,
+                                channelId: newState.channelId,
+                                username: userName,
+                                totalMinutes: 0
+                            };
+                        } else {
+                            existingSession.joinTime = joinTime;
+                        }
+                        
+                        voiceSessions.set(userId, existingSession);
 
                         console.log(`✓ ${userName} joined the meeting voice channel (TRACKING STARTED)`);
 
