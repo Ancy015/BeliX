@@ -1,0 +1,68 @@
+{
+  "1308051461950672971": {
+    "username": "andreabetrina",
+    "sessions": [
+      {
+        "joinTime": "2026-01-16T14:35:54.104Z",
+        "leaveTime": "2026-01-16T15:26:04.438Z",
+        "durationMinutes": 50,
+        "pointsAwarded": 10
+      }
+    ]
+  },
+  "1351241536570130512": {
+    "username": "ancy03115",
+    "sessions": [
+      {
+        "joinTime": "2026-01-16T14:37:00.670Z",
+        "leaveTime": "2026-01-16T15:33:34.434Z",
+        "durationMinutes": 56,
+        "pointsAwarded": 10
+      }
+    ]
+  },
+  "1175789728952483899": {
+    "username": "sriiiharshiii",
+    "sessions": [
+      {
+        "joinTime": "2026-01-16T14:40:07.466Z",
+        "leaveTime": "2026-01-16T14:44:51.944Z",
+        "durationMinutes": 4,
+        "pointsAwarded": 0
+      }
+    ]
+  },
+  "1337419813047373868": {
+    "username": "sowmi2207",
+    "sessions": [
+      {
+        "joinTime": "2026-01-16T14:43:48.474Z",
+        "leaveTime": "2026-01-16T15:33:34.429Z",
+        "durationMinutes": 49,
+        "pointsAwarded": 10
+      }
+    ]
+  },
+  "1355221939207012436": {
+    "username": "amruthaab",
+    "sessions": [
+      {
+        "joinTime": "2026-01-16T14:45:15.495Z",
+        "leaveTime": "2026-01-16T14:49:17.045Z",
+        "durationMinutes": 4,
+        "pointsAwarded": 0
+      }
+    ]
+  },
+  "1337415058061529138": {
+    "username": "samuel93601",
+    "sessions": [
+      {
+        "joinTime": "2026-01-16T14:54:14.158Z",
+        "leaveTime": "2026-01-16T15:27:46.900Z",
+        "durationMinutes": 54,
+        "pointsAwarded": 10
+      }
+    ]
+  }
+}

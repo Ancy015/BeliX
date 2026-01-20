@@ -23,10 +23,7 @@ function savePoints(points) {
     fs.writeFileSync(POINTS_FILE, JSON.stringify(points, null, 2));
 }
 
-module.exports = {
-    handleReactionPoints: (client) => {
-        // Track reactions to prevent duplicate points
-        const reactionTracked = new Set();
+module.exports = {`n    handleReactionPoints: (client) => {`n        const TECH_WORDS_CHANNEL_ID = '1304848106789015648'; // Tech words channel - no points`n        `n        // Track reactions to prevent duplicate points`n        const reactionTracked = new Set();
 
         console.log('✓ Reaction handler loaded');
 
@@ -104,3 +101,4 @@ module.exports = {
         });
     }
 };
+
